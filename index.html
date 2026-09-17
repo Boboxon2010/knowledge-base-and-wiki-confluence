@@ -1,18 +1,83 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <title>Knowledge Base And Wiki Confluence</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #f8fafc; padding: 50px; text-align: center; }
-        .card { background: #1e293b; padding: 40px; border-radius: 12px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { color: #38bdf8; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WikiSpace - Knowledge Base & Wiki</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <h1>Knowledge Base And Wiki Confluence</h1>
-        <p>Ushbu loyiha muvaffaqiyatli dasturlandi va lokal tizimda ishga tushirildi.</p>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="navbar">
+      <div class="logo">
+        <span class="icon">📚</span>
+        <h1>WikiSpace</h1>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Maqolalarni qidirish (sarlavha, teg yoki mazmun)...">
+      </div>
+      <div class="actions">
+        <button id="themeToggleBtn" class="btn btn-secondary">🌙 Rejim</button>
+        <button id="openModalBtn" class="btn btn-primary">+ Yangi maqola</button>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="main-content">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Kategoriyalar</h3>
+        <ul id="categoryList">
+          <li class="active" data-category="all">📁 Barchasi (<span id="count-all">0</span>)</li>
+          <li data-category="favorites">⭐ Sevimlilar (<span id="count-fav">0</span>)</li>
+          <li data-category="Dasturlash">💻 Dasturlash (<span id="count-dev">0</span>)</li>
+          <li data-category="Dizayn">🎨 Dizayn (<span id="count-design">0</span>)</li>
+          <li data-category="Qoidalar">📜 Qoidalar (<span id="count-rules">0</span>)</li>
+        </ul>
+      </aside>
+
+      <!-- Articles Section -->
+      <main class="content-area">
+        <div id="articlesGrid" class="articles-grid"></div>
+        <div id="articleDetail" class="article-detail hidden"></div>
+      </main>
     </div>
+  </div>
+
+  <!-- Modal: Yangi maqola yaratish -->
+  <div id="articleModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Yangi Wiki Maqola Yaratish</h2>
+        <span id="closeModalBtn" class="close-btn">&times;</span>
+      </div>
+      <form id="articleForm">
+        <div class="form-group">
+          <label for="titleInput">Sarlavha:</label>
+          <input type="text" id="titleInput" required placeholder="Masalan: Git workflow qoidalari">
+        </div>
+        <div class="form-group">
+          <label for="categorySelect">Kategoriya:</label>
+          <select id="categorySelect" required>
+            <option value="Dasturlash">Dasturlash</option>
+            <option value="Dizayn">Dizayn</option>
+            <option value="Qoidalar">Qoidalar</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="tagsInput">Teglar (vergul bilan):</label>
+          <input type="text" id="tagsInput" placeholder="javascript, git, guide">
+        </div>
+        <div class="form-group">
+          <label for="contentInput">Mazmuni:</label>
+          <textarea id="contentInput" rows="6" required placeholder="Maqola matnini beraverasiz..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Saqlash va Chop etish</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
